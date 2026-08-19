@@ -1,6 +1,6 @@
 ---
 name: setup-dev:dependabot
-description: `.github/dependabot.yml` を生成する。npm / github-actions / docker、モノレポの directory 分割、groups、pnpm catalog の制約、Expo SDK の ignore、auto-merge、Renovate からの移行。他の setup-dev スキルから参照される。
+description: "`.github/dependabot.yml` を生成する。npm / github-actions / docker、モノレポの directory 分割、groups、pnpm catalog の制約、Expo SDK の ignore、auto-merge、Renovate からの移行。他の setup-dev スキルから参照される。"
 disable-model-invocation: true
 ---
 

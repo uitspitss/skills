@@ -1,6 +1,6 @@
 ---
 name: setup-dev:e2e
-description: @playwright/test で E2E をセットアップする。playwright.config.ts、Vitest とのテストファイル衝突、setup project + storageState による認証、使い捨て E2E DB、CI の別ジョブ化。Next.js / Vite SPA / SSR / モノレポに対応。他の setup-dev スキルから参照される。
+description: "@playwright/test で E2E をセットアップする。playwright.config.ts、Vitest とのテストファイル衝突、setup project + storageState による認証、使い捨て E2E DB、CI の別ジョブ化。Next.js / Vite SPA / SSR / モノレポに対応。他の setup-dev スキルから参照される。"
 disable-model-invocation: true
 ---
 
