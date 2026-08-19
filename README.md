@@ -7,10 +7,14 @@
 ## インストール
 
 ```sh
-npx skills add uitspitss/skills -g --all
+npx skills add uitspitss/skills -g -s '*' -a claude-code -y
 ```
 
-`-g` はユーザーレベル（グローバル）、`--all` は全スキル × 全エージェント一括。private リポジトリだが、`gh auth` 済みなら clone できる。
+`-g` はユーザーレベル（グローバル）、`-s '*'` は全スキル、`-a` は対象エージェント。private リポジトリだが、`gh auth` 済みなら clone できる。
+
+`--all`（= `-s '*' -a '*' -y`）は使わないこと。Eve と PromptScript がグローバルインストールに非対応なため、必ずその2つで失敗表示が出る。Claude Code へのインストール自体は成功しているのでノイズでしかないが、`-a` で絞れば消える。
+
+他のエージェントにも入れるならカンマ区切り（`-a claude-code,codex`）。有効な識別子の一覧は `-a bogus` など不正な値を渡すと表示される。
 
 インストール先は `~/.agents/skills/setup-dev-*`（実体のコピー）で、`~/.claude/skills/` からはそこへ symlink が張られる。
 
