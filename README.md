@@ -27,6 +27,22 @@ git commit -am "..." && git push
 npx skills update
 ```
 
+## ディレクトリ名にコロンを使わない
+
+**スキルのディレクトリ名は `setup-dev-next` のようにハイフンにする**（frontmatter の
+`name: setup-dev:next` はコロンのままでよい）。`npx skills update` は内部で
+「リポジトリ + スキルのフォルダ名」を連結したソースで add を再実行するため、
+フォルダ名にコロンがあると scp 形式のリモート（`host:path`）と解釈されて clone が落ちる:
+
+```
+skills add uitspitss/skills/setup-dev:next --skill setup-dev:next -g -y
+fatal: 'uitspitss/skills/setup-dev:next' does not appear to be a git repository
+→ ✗ Failed to update setup-dev:next
+```
+
+ディレクトリを改名すると lock の `skillPath` がずれるので、一度 `npx skills add ... -a claude-code -y`
+で入れ直すこと。以降は `npx skills update` が通る。
+
 ## スキル一覧
 
 | スキル | 内容 |
