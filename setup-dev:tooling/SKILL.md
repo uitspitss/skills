@@ -869,13 +869,12 @@ copy = "wt step copy-ignored"
 install = "ni"
 ```
 
-`copy` は `install` より前のブロックに置く（`node_modules` をコピーしてから `ni` を走らせると差分だけの処理で済む）。
-
 ```text
 # .worktreeinclude
 .env*
-node_modules/
 ```
+
+**`node_modules/` は含めない。** pnpm ならローカルストアからのハードリンクで数秒で入り直す（実測 4〜6 秒）。数十万ファイルをコピーする方が遅い。
 
 - `.worktreeinclude` が無いと gitignore された**全ファイル**がコピーされる。`.next` / `.turbo` / `dist` などのビルドキャッシュが古い worktree からコピーされると、ビルドツールがキャッシュ不整合を起こす（例: Next.js の Turbopack が CPU 数百%でライブロックし、dev サーバーが応答不能になる実害あり）
 - コピー対象は「gitignore されている **かつ** `.worktreeinclude` にマッチする」ものだけ

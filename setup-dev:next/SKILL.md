@@ -230,10 +230,9 @@ export default defineConfig({
 ```text
 # .worktreeinclude
 .env*
-node_modules/
 ```
 
-`.next/` は**含めない**。
+`.next/` と `node_modules/` は**含めない**（`node_modules` は pnpm のハードリンクで `ni` が数秒で張り直す。コピーの方が遅い）。
 
 #### Optional: portless
 
