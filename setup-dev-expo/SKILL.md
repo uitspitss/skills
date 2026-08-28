@@ -621,7 +621,17 @@ Expo 固有の差分: CI ジョブで `nr build` の代わりに `nr export` を
 
 ステップ 2 で実施済み。再確認のみ。
 
-### 20. Create CLAUDE.md
+### 20. Create AGENTS.md
+
+開発ルールの実体は `AGENTS.md` に書き、`CLAUDE.md` はそれを参照するだけにする（Claude 以外のエージェントからも同じルールを読めるようにするため）。テンプレート同梱の `CLAUDE.md` / `AGENTS.md` がある場合は、内容を `AGENTS.md` に集約してから `CLAUDE.md` を差し替える。
+
+`CLAUDE.md`:
+
+```markdown
+@AGENTS.md
+```
+
+`AGENTS.md`:
 
 ```markdown
 # 開発ルール

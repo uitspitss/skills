@@ -234,9 +234,9 @@ portless proxy start --https
 ```
 PC 再起動後は再実行が必要。自動起動したい場合は launchd/systemd で設定。
 
-## CLAUDE.md への追記
+## AGENTS.md への追記
 
-portless セットアップ後、CLAUDE.md に以下を追記:
+portless セットアップ後、AGENTS.md に以下を追記:
 
 ```markdown
 ## 開発サーバー（portless）

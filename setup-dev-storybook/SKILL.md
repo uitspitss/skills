@@ -434,7 +434,7 @@ export const issueToken = fn(async () => ({})).mockName("issueToken");
 - モックファイルは **JavaScript の ESM**（TypeScript 不可）
 - 型 export（`export type Foo`）は実行時に消えるので並べなくてよい
 - **元モジュールに export を足したらモックにも足す**必要がある。
-  これは手作業なので、プロジェクトの CLAUDE.md に一行書いておくこと
+  これは手作業なので、プロジェクトの AGENTS.md に一行書いておくこと
 - JSX は使えない（`.js` は Vite の JSX 変換対象外）。
   プレースホルダを描くなら `createElement` を使う
 - **プレースホルダに本番のデザイントークンを流用しない。**

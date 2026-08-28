@@ -353,7 +353,7 @@ npm view typescript@7 bin       # -> { tsc: 'bin/tsc' }
 ```bash
 nun @typescript/native-preview
 ni -D typescript
-# package.json の scripts / lefthook.yml / CI / CLAUDE.md の "tsgo" を "tsc" に置換
+# package.json の scripts / lefthook.yml / CI / AGENTS.md の "tsgo" を "tsc" に置換
 ```
 
 **TypeScript 7 は 5.x より厳しい**。既存プロジェクトを 5.x から上げると、通っていたコードが落ちることがある。代表例:

@@ -307,7 +307,7 @@ export type AppEnv = {
 - worktrunk の設定（ルートの `.config/wt.toml` で管理）
 - .gitignore（ルートで管理）
 - GitHub Actions（ルートで管理）
-- CLAUDE.md（ルートで管理）
+- AGENTS.md（ルートで管理。CLAUDE.md は `@AGENTS.md` のみ）
 - README.md（ルートで管理）
 - Cloudflare Workers デプロイ設定（`apps/api` 側で管理）
 
@@ -607,9 +607,19 @@ bindings 越しの経路（D1 の認可、R2 のファイル、Durable Object �
 
 ---
 
-## CLAUDE.md と README.md
+## AGENTS.md と README.md
 
-### 24. Create CLAUDE.md
+### 24. Create AGENTS.md
+
+開発ルールの実体は `AGENTS.md` に書き、`CLAUDE.md` はそれを参照するだけにする（Claude 以外のエージェントからも同じルールを読めるようにするため）。どちらもルートで管理する。
+
+`CLAUDE.md`:
+
+```markdown
+@AGENTS.md
+```
+
+`AGENTS.md`:
 
 ```markdown
 # 開発ルール

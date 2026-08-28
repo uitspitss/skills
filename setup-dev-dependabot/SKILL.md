@@ -207,7 +207,7 @@ updates:
 - catalog の更新を自動化したいなら Renovate を併用する（Renovate は catalog プロトコルを認識する）
 - もしくは catalog を使わず、各 `package.json` に直接バージョンを書く運用に倒す
 
-最低限、リポジトリの README か CLAUDE.md に「catalog バージョンは Dependabot 管轄外」と明記しておく。
+最低限、リポジトリの README か AGENTS.md に「catalog バージョンは Dependabot 管轄外」と明記しておく。
 
 ## Expo / React Native プロジェクト固有の注意
 
@@ -317,11 +317,11 @@ jobs:
    - `automerge` → 上記 auto-merge workflow
 2. Dependabot 設定を有効化し、最初の数 PR が期待通り出ることを確認
 3. ユーザー確認のうえで Renovate 設定ファイルと GitHub App を停止
-4. CLAUDE.md / README.md の「依存更新運用」記述を Dependabot 前提に書き換え
+4. AGENTS.md / README.md の「依存更新運用」記述を Dependabot 前提に書き換え
 
 **翻訳できない機能**: `postUpgradeTasks`、複雑な `extends` チェーン、catalog の自動認識など。これらが運用上必須なら Renovate を残すべき。
 
-## CLAUDE.md への追記
+## AGENTS.md への追記
 
 ```markdown
 ## 依存更新（Dependabot）
@@ -350,7 +350,7 @@ gh api repos/:owner/:repo/dependabot/secrets 2>&1 | head -5
 
 - 既存の `.github/dependabot.yml` は無断で上書きしない（モード判定の上書きルールを参照）
 - security updates は設定とは独立。`open-pull-requests-limit: 0` でも脆弱性 PR は来る
-- pnpm catalog 利用時は更新が Dependabot で完結しない。README/CLAUDE.md に明記し、手動運用フローを併設する
+- pnpm catalog 利用時は更新が Dependabot で完結しない。README/AGENTS.md に明記し、手動運用フローを併設する
 - Expo プロジェクトでは Expo SDK 紐づきパッケージを `ignore` するか、専用 group + `expo-doctor` CI チェックの組み合わせで整合性を担保する
 - auto-merge は patch + dev minor までに留め、メジャーは人間レビュー必須。脆弱性対応 PR の auto-merge はリスクと利便性のトレードオフで判断する
 - モノレポでは `directory` を実在するパッケージ単位で全て宣言する。Dependabot はサブディレクトリの lockfile を自動探索しない
