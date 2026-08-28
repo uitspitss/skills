@@ -160,7 +160,7 @@ declare module "*.css";
 | ルール | 設定 | 理由 |
 |---|---|---|
 | `nextjs/no-page-custom-font` | `off` | Pages Router の `_document.js` を前提にしたルール。App Router では `app/layout.tsx` の `<head>` に font link を置くのが正しいので**誤検知**になる |
-| `nextjs/no-html-link-for-pages` | `warn` | 内部リンクが `<a>` のままだと全ページリロードになる。`next/link` に寄せるべきだが、静的寄りの読み物サイトでは許容する判断もある。**プロジェクトの方針をユーザーに確認し、決めた理由を CLAUDE.md に書く** |
+| `nextjs/no-html-link-for-pages` | `warn` | 内部リンクが `<a>` のままだと全ページリロードになる。`next/link` に寄せるべきだが、静的寄りの読み物サイトでは許容する判断もある。**プロジェクトの方針をユーザーに確認し、決めた理由を AGENTS.md に書く** |
 | `import/no-unassigned-import` | `*.css` を許可 | `import "./globals.css"` は Next の定石 |
 
 **`next lint` は使わない。** Next.js 16 で削除されており、`next build` も lint を実行しなくなった。ESLint から移行する場合は codemod がある:
@@ -310,7 +310,17 @@ Vercel が既定の想定。`DATABASE_URL` などの環境変数を Vercel 側�
 
 Vercel 以外（Cloudflare Workers、self-host）に出す場合は、使っている機能（ISR、Image Optimization、Node API）がターゲットで動くかを個別に確認すること。
 
-### 14. Create CLAUDE.md
+### 14. Create AGENTS.md
+
+開発ルールの実体は `AGENTS.md` に書き、`CLAUDE.md` はそれを参照するだけにする（Claude 以外のエージェントからも同じルールを読めるようにするため）。
+
+`CLAUDE.md`:
+
+```markdown
+@AGENTS.md
+```
+
+`AGENTS.md`:
 
 ```markdown
 # 開発ルール
