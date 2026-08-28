@@ -32,7 +32,7 @@ cat package.json 2>/dev/null | jq -r '.dependencies + .devDependencies | keys[]?
 
 「検出したフレームワーク」と「そのまま進めた場合に壊れるもの」を具体的に挙げ、次の3択をユーザーに提示する:
 
-1. **ツール類のみ適用（推奨）** — 手順 3〜7 と 13 を飛ばし、手順 8〜12・14〜21（oxlint/oxfmt, Vitest, knip, lefthook, worktrunk, CI, .gitignore, AGENTS.md, README）だけを適用する。既存のフレームワークはそのまま
+1. **ツール類のみ適用（推奨）** — 手順 3〜7 と 13 を飛ばし、手順 8〜12・14〜21（oxlint/oxfmt, Vitest, knip, lefthook, worktrunk, CI, .gitignore, AGENTS.md + CLAUDE.md, README）だけを適用する。既存のフレームワークはそのまま
 2. **Vite + TanStack へ全面移行** — 既存フレームワークを捨てて作り直す。何が失われるか（サーバーコンポーネント、API ルート、SSR/ISR、ファイルベースルーティング等）を列挙してから合意を取る
 3. **移行は検討だけ** — ツール類を入れ、移行プランは文書で提示するに留める
 
