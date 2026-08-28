@@ -147,7 +147,7 @@ na exec expo install @expo/metro-runtime
 - iOS: ASCII 英数字 + ハイフン + ドット OK
 - Android: ハイフン **不可**、各セグメント英字始まり必須
 - **両 OS で同じ値を共有する** のが運用的に最も楽 → ハイフン避け、camelCase か単語結合
-- 例: `com.uitspitss.edenphotomemories`
+- 例: `com.example.myapp`
 - **後から変えると面倒**（既存ビルドが別アプリ扱い、TestFlight / Play Store の app record と紐づく）。**最初に決めて固定**
 
 #### `scheme` と `typedRoutes`
