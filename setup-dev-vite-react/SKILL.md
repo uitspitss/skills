@@ -221,37 +221,52 @@ import エイリアスを検出して `components.json` に焼き込むので、
 ni -D react-scan react-grab @tanstack/devtools-vite @tanstack/react-devtools
 ```
 
-開発時のみ有効化する。`src/main.tsx` のエントリポイントに以下を追加:
+react-grab は `src/main.tsx` に追加（開発時のみ）:
 
 ```ts
 if (import.meta.env.DEV) {
-  import("react-scan").then(({ scan }) => {
-    scan({ enabled: true });
-  });
   // react-grab: UI 要素をホバー → ⌘C で HTML / コンポーネント / ソース位置 (file:line:col) を
   // コーディングエージェント（Claude Code 等）に渡せる。副作用 import するだけで有効化。
   import("react-grab");
 }
 ```
 
-**react-scan と react-grab の役割の違い**: どちらも aidenybai 作・bippy ベースで「dev のみ・要素オーバーレイ」という基盤は共通だが、機能は重複しない。react-scan は不要な再レンダリングを可視化する**パフォーマンス**ツール、react-grab は要素のコンテキストを **AI エージェントに渡す**ツール。用途が直交するので両方入れてよい。
-
-**本番に絶対含めない**: react-grab は React 内部 (Fiber) とソース位置を露出するため、必ず `import.meta.env.DEV` ガード内に置く。Vite が build 時に枝ごと dead code elimination で除去する。
-
-`vite.config.ts` に `@tanstack/devtools-vite` プラグインを追加（**dev サーバー時のみ適用**）:
+react-scan は React より前に評価されないと DevTools フックを奪えず、`main.tsx` からの動的 import では再レンダリングを検出できない（ツールバーは出るがエラーも出ずに無反応）。そのため `vite.config.ts` のプラグインで `index.html` の `<head>` 先頭に差し込む。`@tanstack/devtools-vite` と合わせて **dev サーバー時のみ適用**:
 
 ```ts
 import { devtools } from "@tanstack/devtools-vite";
 
 export default defineConfig({
   plugins: [
+    {
+      name: "react-scan",
+      apply: "serve",
+      // order: "pre" でないと bare import が解決されない
+      transformIndexHtml: {
+        order: "pre",
+        handler: () => [
+          {
+            tag: "script",
+            attrs: { type: "module" },
+            children: 'import { scan } from "react-scan"; scan({ enabled: true });',
+            injectTo: "head-prepend",
+          },
+        ],
+      },
+    },
     { ...devtools(), apply: "serve" },
     react(),
   ],
 });
 ```
 
-`apply: "serve"` で dev サーバー時のみプラグインを有効化し、本番 build には devtools-vite が一切関与しないようにする。
+`react-scan/auto` は 0.5.7 時点で ESM の `auto.mjs` が無く解決に失敗するので、`react-scan` 本体と `scan()` を使う。
+
+**react-scan と react-grab の役割の違い**: どちらも aidenybai 作・bippy ベースで「dev のみ・要素オーバーレイ」という基盤は共通だが、機能は重複しない。react-scan は不要な再レンダリングを可視化する**パフォーマンス**ツール、react-grab は要素のコンテキストを **AI エージェントに渡す**ツール。用途が直交するので両方入れてよい。
+
+**本番に絶対含めない**: react-grab は React 内部 (Fiber) とソース位置を露出するため、必ず `import.meta.env.DEV` ガード内に置く。Vite が build 時に枝ごと dead code elimination で除去する。react-scan はプラグインごと build に関与しない。
+
+`apply: "serve"` で dev サーバー時のみプラグインを有効化し、本番 build には react-scan / devtools-vite が一切関与しないようにする。
 
 ### 8. Install and Configure oxlint + oxfmt
 
